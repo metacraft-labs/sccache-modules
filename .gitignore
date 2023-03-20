@@ -1,0 +1,11 @@
+# "dotenv" environment variable files
+.env
+
+# Cached profile files created by direnv
+.direnv
+
+# Devenv.sh profile
+.devenv
+
+# Symlink to last build Nix package
+result
