@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
@@ -12,6 +17,9 @@
       perSystem = {
         config,
         pkgs,
+        self',
+        inputs,
+        system,
         ...
       }: {
         devShells.default = pkgs.mkShell {
@@ -19,6 +27,14 @@
           shellHook = ''
             figlet -w 80 "MCL's NixOS Modules"
           '';
+        };
+        nixosConfigurations.sccache = inputs.nixpkgs.lib.nixosSystem {
+          inherit pkgs system;
+          modules = [./modules/sccache.nix];
+          specialArgs = {
+            user = "monyarm";
+            nixpkgs = inputs.nixpkgs;
+          };
         };
       };
     };
