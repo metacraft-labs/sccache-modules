@@ -14,6 +14,9 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin"];
+      flake = {
+        lib.sccache = import ./modules/sccache.nix;
+      };
       perSystem = {
         config,
         pkgs,
@@ -27,14 +30,6 @@
           shellHook = ''
             figlet -w 80 "MCL's NixOS Modules"
           '';
-        };
-        nixosConfigurations.sccache = inputs.nixpkgs.lib.nixosSystem {
-          inherit pkgs system;
-          modules = [./modules/sccache.nix];
-          specialArgs = {
-            user = "monyarm";
-            nixpkgs = inputs.nixpkgs;
-          };
         };
       };
     };
