@@ -9,7 +9,7 @@ with lib; let
   user = defaultUser;
   cfg = config.service.sccache;
 
-  serverConf = writeTextFile {
+  schedulerConf = pkgs.writeTextFile {
     name = "scheduler.conf";
     text = ''
       # The socket address the scheduler will listen on. It's strongly recommended
@@ -26,7 +26,7 @@ with lib; let
     '';
   };
 
-  serverConf = writeTextFile {
+  serverConf = pkgs.writeTextFile {
     name = "server.conf";
     text = ''
       # This is where client toolchains will be stored.
@@ -55,7 +55,7 @@ with lib; let
     '';
   };
 
-  clientConf = writeTextFile {
+  clientConf = pkgs.writeTextFile {
     name = "client.conf";
     text = ''
       [dist]
