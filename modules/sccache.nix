@@ -77,7 +77,7 @@ with lib; let
 in {
   meta.maintainers = [];
 
-  options.service.sccache = {
+  options.services.sccache = {
     enable = mkEnableOption "sccache";
     scheduler = lib.mkOption {
       type = lib.types.bool;
