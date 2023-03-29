@@ -16,6 +16,7 @@
       systems = ["x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin"];
       flake = {
         lib.sccache = import ./modules/sccache.nix;
+        lib.icecream = import ./modules/icecream.nix;
       };
       perSystem = {
         config,

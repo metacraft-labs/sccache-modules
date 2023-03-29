@@ -7,7 +7,7 @@
 }:
 with lib; let
   user = defaultUser;
-  cfg = config.service.sccache;
+  cfg = config.services.sccache;
 
   schedulerConf = pkgs.writeTextFile {
     name = "scheduler.conf";

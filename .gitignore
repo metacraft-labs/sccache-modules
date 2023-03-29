@@ -9,3 +9,6 @@
 
 # Symlink to last build Nix package
 result
+
+# flake.lock
+flake.lock
