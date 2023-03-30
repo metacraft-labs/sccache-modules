@@ -17,6 +17,7 @@
       flake = {
         lib.sccache = import ./modules/sccache.nix;
         lib.icecream = import ./modules/icecream.nix;
+        lib.distcc = import ./modules/distcc.nix;
       };
       perSystem = {
         config,

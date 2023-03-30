@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  environment.systemPackages = [pkgs.icemon];
+  environment.systemPackages = [pkgs.icemon pkgs.icecream];
   services.icecream.daemon.enable = true;
   services.icecream.daemon.openFirewall = true;
   services.icecream.daemon.openBroadcast = true;
