@@ -6,8 +6,8 @@
   ...
 }:
 with lib; let
-  user = defaultUser;
   cfg = config.services.sccache;
+  user = defaultUser;
 
   schedulerConf = pkgs.writeTextFile {
     name = "scheduler.conf";
@@ -77,48 +77,51 @@ with lib; let
 in {
   meta.maintainers = [];
 
-  options.services.sccache = {
-    enable = mkEnableOption "sccache";
-    scheduler = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-    };
-    client = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-    };
-    server = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-    };
-    client_token = lib.mkOption {
-      type = lib.types.str;
-      default = "YOUR_TOKEN_HERE";
-    };
-    #server_key = lib.mkOption {
-    #        type = lib.types.str;
-    #        default = "YOUR_KEY_HERE";
-    #};                #server_token = lib.mkOption {
-    #        type = lib.types.str;
-    #        default = "YOUR_TOKEN_HERE";
-    #};
-    token = lib.mkOption {
-      type = lib.types.str;
-      default = "TOKEN";
-    };
-    sched_addr = lib.mkOption {
-      type = lib.types.str;
-      default = "127.0.0.1:10600";
-    };
-    sched_url = lib.mkOption {
-      type = lib.types.str;
-      default = "http://127.0.0.1";
-    };
-    server_addr = lib.mkOption {
-      type = lib.types.str;
-      default = "127.0.0.1:10501";
+  options = {
+    services.sccache = {
+      enable = mkEnableOption "sccache";
+      scheduler = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      client = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      server = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      client_token = lib.mkOption {
+        type = lib.types.str;
+        default = "YOUR_TOKEN_HERE";
+      };
+      #server_key = lib.mkOption {
+      #        type = lib.types.str;
+      #        default = "YOUR_KEY_HERE";
+      #};                #server_token = lib.mkOption {
+      #        type = lib.types.str;
+      #        default = "YOUR_TOKEN_HERE";
+      #};
+      token = lib.mkOption {
+        type = lib.types.str;
+        default = "TOKEN";
+      };
+      sched_addr = lib.mkOption {
+        type = lib.types.str;
+        default = "127.0.0.1:10600";
+      };
+      sched_url = lib.mkOption {
+        type = lib.types.str;
+        default = "http://127.0.0.1";
+      };
+      server_addr = lib.mkOption {
+        type = lib.types.str;
+        default = "127.0.0.1:10501";
+      };
     };
   };
+
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [sccache bubblewrap icecream];
     networking.firewall.allowedTCPPorts = [10600 10501];

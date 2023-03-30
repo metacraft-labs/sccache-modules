@@ -1,13 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  defaultUser,
-  service,
-  ...
-}:
-with lib;
-with config; {
-  config.services.icecream.daemon.enable = true;
-  config.services.icecream.scheduler.enable = true;
+{pkgs, ...}: {
+  environment.systemPackages = [pkgs.icemon];
+  services.icecream.daemon.enable = true;
+  services.icecream.daemon.openFirewall = true;
+  services.icecream.daemon.openBroadcast = true;
+  services.icecream.scheduler.enable = true;
+  services.icecream.scheduler.openFirewall = true;
+  # services.icecream.scheduler.openBroadcast = true;
 }
